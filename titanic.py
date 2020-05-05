@@ -24,6 +24,21 @@ train["Female"] = sexo_dummies["female"]
 train["Male"] = sexo_dummies["male"]
 train['Idade'].fillna(31, inplace=True)
 
+def faixaIdade(idd):
+    if idd <= 10 :
+        return "ate 10"
+    elif idd <= 20:
+        return "ate 20"
+    elif idd <= 30:
+        return "ate 30"
+    elif idd <= 50:
+        return "ate ate"
+    elif idd <= 100:
+        return "maior de 50"      
+
+train["Idade"] = train['Idade'].apply(faixaIdade)
+    
+
 
 x_train, x_test, y_train, y_test = train_test_split(train.drop(columns=["Survived"]),
                                             train["Survived"], test_size=0.25,
